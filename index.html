@@ -4,31 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>REDVOLUTION | ระบบเลือกชนิดกีฬา ทีมสีแดง</title>
+
+  <!-- 1. เร่งความเร็ว: สั่งเชื่อมต่อท่อสัญญาณไปหา Google ล่วงหน้าทันที -->
+  <link rel="preconnect" href="https://script.google.com" crossorigin>
+  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="https://script.google.com">
+  <link rel="dns-prefetch" href="https://script.googleusercontent.com">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: #fff1f2;
+      background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #450a0a 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    /* หน้าจอต้อนรับสีแดง แสดงทันทีใน 0.05 วินาทีระหว่างรอ iframe */
+    #instantLoader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      z-index: 10;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .fire-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+      animation: pulse 1s infinite alternate;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+    .sub {
+      font-size: 13px;
+      color: #fde047;
+      margin-top: 6px;
+    }
+    @keyframes pulse {
+      from { transform: scale(0.95); }
+      to { transform: scale(1.08); }
     }
     iframe {
+      position: relative;
+      z-index: 20;
       width: 100%;
       height: 100%;
-      height: 100dvh; /* ปรับเต็มจอสำหรับมือถือ iOS / Android */
+      height: 100dvh;
       border: none;
       display: block;
+      background: transparent;
     }
   </style>
 </head>
 <body>
-  <!-- นำลิงก์ Web App /exec ของคุณมาใส่แทนที่ใน src -->
+  <!-- แสดงหน้าจอสีแดงทันทีที่แตะลิงก์ ไม่ต้องรอหน้าขาว -->
+  <div id="instantLoader">
+    <div class="fire-icon">🔥</div>
+    <div class="title">REDVOLUTION</div>
+    <div class="sub">กำลังเชื่อมต่อระบบทีมสีแดง...</div>
+  </div>
+
+  <!-- เปลี่ยน src เป็นลิงก์ Web App /exec ของคุณ -->
   <iframe 
-    src="https://script.google.com/macros/s/AKfycbwWoBr8zW_zglWteAW3qsxEK_R8UVic3hWCdRKYzggFnGFI4FzglovFvJGds-EGkuMq/exec" 
+    src="https://script.google.com/macros/s/AKfycbwWoBr8zW_zglWteAW3qsxEK_R8UVic3hWCdRKYzggFnGFI4FzglovFvJGds-EGkuMq/exec"
+    onload="document.getElementById('instantLoader').style.opacity='0'"
     allow="clipboard-write; camera; microphone; geolocation"
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads allow-modals">
   </iframe>
